@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
+import { Button, ColorButton } from "@/components/ui/button";
 
 export default function DrawPage() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -66,6 +66,16 @@ export default function DrawPage() {
 
   return (
     <div className="flex flex-col items-center p-4">
+        <div className="flex gap-2 mb-4">
+          <ColorButton colour="blue" onClick={() => setPenColour("blue")} />
+          <ColorButton colour="red" onClick={() => setPenColour("red")} />
+          <ColorButton colour="white" onClick={() => setPenColour("white")} />
+          <ColorButton colour="yellow" onClick={() => setPenColour("yellow")} />
+          <ColorButton colour="green" onClick={() => setPenColour("green")} />
+          <ColorButton colour="pink" onClick={() => setPenColour("pink")} />
+          <ColorButton colour="grey" onClick={() => setPenColour("grey")} />
+          <ColorButton colour="orange" onClick={() => setPenColour("orange")} />
+        </div>
       <div className="w-full max-w-4xl h-[500px] border-2 border-white">
         <canvas
           ref={canvasRef}

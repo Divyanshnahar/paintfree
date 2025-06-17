@@ -83,7 +83,7 @@ export default function DrawPage() {
       </div>
       <div className="flex gap-4 mt-4">
         <Button onClick={handleDownload}>Download Drawing</Button>
-        <Button variant={isErasing ? "secondary" : "default"} onClick={handleEraser}>
+        <Button onClick={handleEraser}>
           {isErasing ? "Eraser On" : "Eraser"}
         </Button>
       </div>

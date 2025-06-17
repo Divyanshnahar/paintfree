@@ -14,3 +14,19 @@ export const Button: React.FC<ButtonProps> = ({ children, ...props }) => {
     </button>
   );
 };
+
+type ColorButtonProps = ButtonProps & {
+    colour: string;
+};
+
+export const ColorButton: React.FC<ColorButtonProps> = ({ children, colour, ...props }) => {
+    return (
+        <button
+            className={`px-4 py-2 text-white rounded hover:brightness-90 transition`}
+            style={{ backgroundColor: colour }}
+            {...props}
+        >
+            {children}
+        </button>
+    );
+};

@@ -47,10 +47,10 @@ model = tf.keras.Sequential([
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
 # Train model
-model.fit(train_data, validation_data=val_data, epochs=10)
+model.fit(train_data, validation_data=val_data, epochs=7)
 
 # Save the model
-model.save("shape_detector_model.h5")
+model.save("shape_detector_model.h5", include_optimizer=False)
 
 # Evaluate on test set
 test_loss, test_acc = model.evaluate(test_data)

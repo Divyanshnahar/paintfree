@@ -64,18 +64,36 @@ export default function DrawPage() {
     setIsErasing((prev) => !prev);
   };
 
+  const handlePredict = async () => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    canvas.toBlob(async (blob) => {
+      if (!blob) return;
+      const formData = new FormData();
+      formData.append("file", blob, "drawing.png");
+
+      const res = await fetch("http://localhost:8000/predict", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await res.json();
+      alert(`Predicted Shape: ${data.prediction}`);
+    }, "image/png");
+  };
+
   return (
     <div className="flex flex-col items-center p-4">
-        <div className="flex gap-2 mb-4">
-          <ColorButton colour="blue" onClick={() => setPenColour("blue")} />
-          <ColorButton colour="red" onClick={() => setPenColour("red")} />
-          <ColorButton colour="white" onClick={() => setPenColour("white")} />
-          <ColorButton colour="yellow" onClick={() => setPenColour("yellow")} />
-          <ColorButton colour="green" onClick={() => setPenColour("green")} />
-          <ColorButton colour="pink" onClick={() => setPenColour("pink")} />
-          <ColorButton colour="grey" onClick={() => setPenColour("grey")} />
-          <ColorButton colour="orange" onClick={() => setPenColour("orange")} />
-        </div>
+      <div className="flex gap-2 mb-4">
+        <ColorButton colour="blue" onClick={() => setPenColour("blue")} />
+        <ColorButton colour="red" onClick={() => setPenColour("red")} />
+        <ColorButton colour="white" onClick={() => setPenColour("white")} />
+        <ColorButton colour="yellow" onClick={() => setPenColour("yellow")} />
+        <ColorButton colour="green" onClick={() => setPenColour("green")} />
+        <ColorButton colour="pink" onClick={() => setPenColour("pink")} />
+        <ColorButton colour="grey" onClick={() => setPenColour("grey")} />
+        <ColorButton colour="orange" onClick={() => setPenColour("orange")} />
+      </div>
       <div className="w-full max-w-4xl h-[500px] border-2 border-white">
         <canvas
           ref={canvasRef}
@@ -96,6 +114,7 @@ export default function DrawPage() {
         <Button onClick={handleEraser}>
           {isErasing ? "Eraser On" : "Eraser"}
         </Button>
+        <Button onClick={handlePredict}>Predict Shape</Button>
       </div>
     </div>
   );

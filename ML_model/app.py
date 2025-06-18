@@ -14,7 +14,7 @@ app.add_middleware(
 )
 
 model = tf.keras.models.load_model("shape_detector_model.h5")
-classes = ["circle", "square", "triangle", "parallelogram", "rectangle", "kite", "rhombus", "trapezoid"]
+classes = ["circle", "kite", "parallelogram", "rectangle", "rhombus", "square", "trapezoid", "triangle"]
 
 @app.get("/")
 async def root():

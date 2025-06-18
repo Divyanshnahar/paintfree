@@ -17,13 +17,14 @@ train_data = train_datagen.flow_from_directory(
     batch_size=BATCH_SIZE,
     class_mode='categorical'
 )
-
+# print("Class Indices:", train_data.class_indices)
 val_data = val_datagen.flow_from_directory(
     "dataset/val",
     target_size=(IMG_SIZE, IMG_SIZE),
     batch_size=BATCH_SIZE,
     class_mode='categorical'
 )
+
 
 test_data = test_datagen.flow_from_directory(
     "dataset/test",
@@ -32,6 +33,7 @@ test_data = test_datagen.flow_from_directory(
     class_mode='categorical',
     shuffle=False  # important for evaluation
 )
+
 
 # CNN model
 model = tf.keras.Sequential([
